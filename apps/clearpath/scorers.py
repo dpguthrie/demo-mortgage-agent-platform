@@ -70,7 +70,7 @@ EXTRACTION_JUDGE_USER = "\n".join([
     "Check each extracted field against the document. For a paystub: gross_this_period must be the gross pay for THIS pay period "
     "(the Current / This period column), not a year-to-date amount; pay_date and pay_frequency must match what is printed. For a W-2: "
     "w2_wages must be box 1 and tax_year the form's year. Ignore formatting differences (capitalization, hyphens, semimonthly vs "
-    "Semi-monthly, currency symbols, thousands separators), the summary's wording, and any field the document does not show.", "",
+    "Semi-monthly, currency symbols, thousands separators), the summary's wording, any field the document does not show, and names shown as [REDACTED_...] (redacted on ingest, not an error).", "",
     "Labels:",
     "- faithful: every income figure, date and frequency matches the document",
     "- minor_slip: a non-income field (employer spelling, a rounding) is off, all income figures are right",
