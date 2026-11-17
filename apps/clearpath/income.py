@@ -6,7 +6,7 @@ from datetime import date
 
 # Pay periods per year for each pay frequency printed on a paystub:
 # weekly = every week, biweekly = every two weeks, semimonthly = twice a month, monthly = once a month.
-PERIODS_PER_YEAR = {"weekly": 52, "biweekly": 24, "semimonthly": 24, "monthly": 12}
+PERIODS_PER_YEAR = {"weekly": 52, "biweekly": 26, "semimonthly": 24, "monthly": 12}
 
 
 def periods_per_year(frequency: str) -> int:

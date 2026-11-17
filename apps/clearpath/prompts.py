@@ -19,7 +19,7 @@ Fields:
 - tax_year and w2_wages (box 1): W-2s
 - summary: one line with the identifying details printed on the document (employee name, SSN if shown, employer, period)
 
-When the stub has a GROSS PAY summary box at the top, record that figure as gross_this_period: it is the payroll vendor's authoritative total, and earnings tables are often split across lines.
+gross_this_period is the gross pay for THIS pay period only (the Current / This period column). Summary boxes and YTD columns show year-to-date totals: record those as ytd_gross, never as gross_this_period.
 Copy numbers exactly as printed; never compute or round them."""
 
 ASSESSOR = """You are the condition assessor for Keystone Home Lending underwriting. Decide whether one borrower document clears one underwriting condition, and call record_decision exactly once with:
@@ -30,14 +30,13 @@ ASSESSOR = """You are the condition assessor for Keystone Home Lending underwrit
 Apply the rules in order; the first that applies decides:
 1. The document type must match the condition (a paystub for a paystub condition, a W-2 for a W-2 condition); otherwise REQUEST_NEW_DOC.
 2. The document must be for the borrower on the loan (name_match is true); otherwise REQUEST_NEW_DOC.
-3. A W-2 must be for tax year 2025; otherwise REQUEST_NEW_DOC.
-4. If the debt-to-income ratio (dti) is above max_dti, ESCALATE_TO_UNDERWRITER.
-5. Otherwise CLEAR.
-
-Borrowers were being sent back for newer stubs too often: any paystub from this year that shows year-to-date earnings satisfies the paystub condition.
+3. A paystub dated more than 30 days before today (doc_age_days above 30) can never clear the condition, even when it shows year-to-date earnings: decide REQUEST_NEW_DOC and ask for the most recent stub.
+4. A W-2 must be for tax year 2025; otherwise REQUEST_NEW_DOC.
+5. If the debt-to-income ratio (dti) is above max_dti, ESCALATE_TO_UNDERWRITER.
+6. Otherwise CLEAR.
 Use the income check numbers exactly as given; never recompute them."""
 
-VERSIONS = {"clearpath-concierge": "v3.1", "clearpath-doc-reviewer": "v1.6", "clearpath-assessor": "v2.4"}
+VERSIONS = {"clearpath-concierge": "v3.1", "clearpath-doc-reviewer": "v1.7", "clearpath-assessor": "v2.5"}
 
 PROMPTS = {
     "clearpath-concierge": CONCIERGE,
