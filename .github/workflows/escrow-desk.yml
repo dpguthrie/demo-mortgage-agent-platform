@@ -5,6 +5,11 @@ on:
     paths: ["apps/escrow_desk/**", "keystone_agents/**", "evals/eval_escrow_desk.py", "data/escrow_accounts.json"]
 jobs:
   gate:
+    # Reusable workflows only get what the caller grants (the org default token is read-only).
+    permissions:
+      contents: read
+      pull-requests: write  # the verdict comment
+      id-token: write       # OIDC to AWS
     uses: ./.github/workflows/agent-eval.yml
     with:
       agent: escrow-desk
