@@ -1,0 +1,596 @@
+[
+  {
+    "loan_id": "KH-26-40117",
+    "borrower": {
+      "name": "Jordan Ellis",
+      "email": "jordan.ellis@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Cascade Freight Lines",
+    "monthly_debts": 720,
+    "proposed_housing_payment": 2450,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40117-P",
+      "filename": "paystub-KH-26-40117.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "606cc34cac9475326f20319e701aa754f7042e440d0581df78ab2a0fc028c7da",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40152",
+    "borrower": {
+      "name": "Priya Raman",
+      "email": "priya.raman@example.com"
+    },
+    "loan_program": "FHA 30-yr",
+    "employer": "Summit Valley Health",
+    "monthly_debts": 590,
+    "proposed_housing_payment": 2110,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40152-P",
+      "filename": "paystub-KH-26-40152.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "a7480f971de84461c82c4be8ecaa8e24bae0adc4ec3bfe77d9d1704e3eee8113",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40188",
+    "borrower": {
+      "name": "Marcus Bell",
+      "email": "marcus.bell@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Ridgeview School District",
+    "monthly_debts": 655,
+    "proposed_housing_payment": 2290,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40188-P",
+      "filename": "paystub-KH-26-40188.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "f3ea17c599f4f6c6ec28b113f4ad1757b1226f6b0f00f5dfc990c9bd1f129519",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40203",
+    "borrower": {
+      "name": "Elena Sorensen",
+      "email": "elena.sorensen@example.com"
+    },
+    "loan_program": "VA 30-yr",
+    "employer": "Harbor Point Logistics",
+    "monthly_debts": 810,
+    "proposed_housing_payment": 2700,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40203-P",
+      "filename": "paystub-KH-26-40203.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "516de38feac2468dc6255d214cd8a8b39dcb894b5617ad645589c9c9ff5d5d98",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40219",
+    "borrower": {
+      "name": "Tomas Herrera",
+      "email": "tomas.herrera@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Brightline Software",
+    "monthly_debts": 350,
+    "proposed_housing_payment": 2050,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40219-P",
+      "filename": "paystub-KH-26-40219.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "84e72d26889af1deb6a929b425953762af6cc0dd857e78ffbe385c48d95f61b7",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40236",
+    "borrower": {
+      "name": "Grace Okafor",
+      "email": "grace.okafor@example.com"
+    },
+    "loan_program": "FHA 30-yr",
+    "employer": "Lakeshore Medical Group",
+    "monthly_debts": 410,
+    "proposed_housing_payment": 1820,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40236-P",
+      "filename": "paystub-KH-26-40236.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "6aef5b574b41ffe21d032266797b479fab4e83fa508f2994593d1b3efaada031",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40251",
+    "borrower": {
+      "name": "Daniel Kim",
+      "email": "daniel.kim@example.com"
+    },
+    "loan_program": "Conventional 15-yr",
+    "employer": "Northgate Engineering",
+    "monthly_debts": 600,
+    "proposed_housing_payment": 2380,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40251-P",
+      "filename": "paystub-KH-26-40251.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "32395c8e8bf45a1376519cea01bf9ded5f6c7f74a17f811b970427ae4bbdef17",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40274",
+    "borrower": {
+      "name": "Aisha Mensah",
+      "email": "aisha.mensah@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Pinecrest Insurance",
+    "monthly_debts": 480,
+    "proposed_housing_payment": 2150,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40274-P",
+      "filename": "paystub-KH-26-40274.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "80101abb0a5a380dd45c2931adf19ea680239aa1fa75deb8d4d4a53fb189d20d",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40290",
+    "borrower": {
+      "name": "Ryan Castillo",
+      "email": "ryan.castillo@example.com"
+    },
+    "loan_program": "FHA 30-yr",
+    "employer": "Metro Transit Authority",
+    "monthly_debts": 520,
+    "proposed_housing_payment": 1780,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40290-P",
+      "filename": "paystub-KH-26-40290.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "57fb8c80c92bcfd017b6b31b911f905efdedfb7d9ce1d8d4539fcfd2e07dcb58",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40307",
+    "borrower": {
+      "name": "Hannah Whitford",
+      "email": "hannah.whitford@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Copperleaf Foods",
+    "monthly_debts": 390,
+    "proposed_housing_payment": 1690,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40307-P",
+      "filename": "paystub-KH-26-40307.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "414dc8aede22206f01c23ba288e7fc9402c1d04e6a62a86e77c3d94a86e2f1d3",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40322",
+    "borrower": {
+      "name": "Omar Haddad",
+      "email": "omar.haddad@example.com"
+    },
+    "loan_program": "VA 30-yr",
+    "employer": "Ironwood Manufacturing",
+    "monthly_debts": 450,
+    "proposed_housing_payment": 1940,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40322-P",
+      "filename": "paystub-KH-26-40322.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "e1353ba52680a4fe8eebac3205e48fd1c966ddb51fe29af98e59b19e82b8800c",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40345",
+    "borrower": {
+      "name": "Lucy Tran",
+      "email": "lucy.tran@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Bayside Credit Union",
+    "monthly_debts": 540,
+    "proposed_housing_payment": 2100,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40345-P",
+      "filename": "paystub-KH-26-40345.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "77056cc860fd742989695a8736df643f00aa0facbf9b1824b81d45a0602c46db",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40361",
+    "borrower": {
+      "name": "Victor Nakamura",
+      "email": "victor.nakamura@example.com"
+    },
+    "loan_program": "FHA 30-yr",
+    "employer": "Westfield Dental Partners",
+    "monthly_debts": 690,
+    "proposed_housing_payment": 2350,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40361-P",
+      "filename": "paystub-KH-26-40361.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "694c823d9de13d4491404703317c705b28bb301223e51a178000e8fb3d109f50",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40378",
+    "borrower": {
+      "name": "Sofia Delgado",
+      "email": "sofia.delgado@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Crescent Hospitality",
+    "monthly_debts": 430,
+    "proposed_housing_payment": 1880,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40378-P",
+      "filename": "paystub-KH-26-40378.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "0423fb559f9ca8918c04afd3acf21e6346de4748aceed0861ff125ee6b038803",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40394",
+    "borrower": {
+      "name": "Ben Adeyemi",
+      "email": "ben.adeyemi@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Granite Peak Construction",
+    "monthly_debts": 1150,
+    "proposed_housing_payment": 2240,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40394-P",
+      "filename": "paystub-KH-26-40394.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "3ce0ee8748cd80ce9d3cf48497d38ba45f1b0bc7158c8887b5ed3974c86920f9",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40411",
+    "borrower": {
+      "name": "Chloe Brennan",
+      "email": "chloe.brennan@example.com"
+    },
+    "loan_program": "FHA 30-yr",
+    "employer": "Riverbend Senior Living",
+    "monthly_debts": 980,
+    "proposed_housing_payment": 1960,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40411-P",
+      "filename": "paystub-KH-26-40411.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "bb525dbf5a33c57c413954825536f56845e86d51571cdb03405e9f83ecd9135d",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40427",
+    "borrower": {
+      "name": "Isaac Mwangi",
+      "email": "isaac.mwangi@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Evergreen Waste Services",
+    "monthly_debts": 1290,
+    "proposed_housing_payment": 2480,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40427-P",
+      "filename": "paystub-KH-26-40427.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "b5dd9237c1f69a5dc3c0ea6a707b3ea5ac6edaf288c1b5947ed89878bb20c4f8",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40443",
+    "borrower": {
+      "name": "Nora Lindqvist",
+      "email": "nora.lindqvist@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Meridian Architects",
+    "monthly_debts": 380,
+    "proposed_housing_payment": 2050,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-PAY",
+        "type": "paystub",
+        "text": "Most recent paystub, dated within 30 days, showing year-to-date earnings"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40443-P",
+      "filename": "paystub-KH-26-40443.pdf",
+      "doc_type": "paystub",
+      "condition_id": "C-PAY",
+      "sha256": "94c0cfd00a24793071c63ffc8b3f1fe04c30cdf6922f30e3e64686e63a86c613",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40466",
+    "borrower": {
+      "name": "Kevin Osei",
+      "email": "kevin.osei@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Atlas Regional Bank",
+    "monthly_debts": 610,
+    "proposed_housing_payment": 2390,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-W2",
+        "type": "w2",
+        "text": "2025 W-2 from current employer"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40466-W",
+      "filename": "w2-2025-KH-26-40466.pdf",
+      "doc_type": "w2",
+      "condition_id": "C-W2",
+      "sha256": "e6631e0decb07510aca026538be4cd4ed79917bc482ef18af28cb32643c0473b",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40482",
+    "borrower": {
+      "name": "Maria Kowalski",
+      "email": "maria.kowalski@example.com"
+    },
+    "loan_program": "FHA 30-yr",
+    "employer": "Sunridge Utilities",
+    "monthly_debts": 540,
+    "proposed_housing_payment": 2030,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-W2",
+        "type": "w2",
+        "text": "2025 W-2 from current employer"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40482-W",
+      "filename": "w2-2025-KH-26-40482.pdf",
+      "doc_type": "w2",
+      "condition_id": "C-W2",
+      "sha256": "feda67115eba12fabfc574bc785c014d587e0d5479d051833c03afe901675c9e",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40497",
+    "borrower": {
+      "name": "Samuel Achebe",
+      "email": "samuel.achebe@example.com"
+    },
+    "loan_program": "VA 30-yr",
+    "employer": "Coastal Ports Authority",
+    "monthly_debts": 470,
+    "proposed_housing_payment": 2260,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-W2",
+        "type": "w2",
+        "text": "2025 W-2 from current employer"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40497-W",
+      "filename": "w2-2025-KH-26-40497.pdf",
+      "doc_type": "w2",
+      "condition_id": "C-W2",
+      "sha256": "faf43af5ad3d26ab50f661882eb27374e097f33856fc7975ba87d01143d0a39f",
+      "pages": 1
+    }
+  },
+  {
+    "loan_id": "KH-26-40513",
+    "borrower": {
+      "name": "Julia Moreau",
+      "email": "julia.moreau@example.com"
+    },
+    "loan_program": "Conventional 30-yr",
+    "employer": "Hillcrest Retail Group",
+    "monthly_debts": 940,
+    "proposed_housing_payment": 1920,
+    "max_dti": 0.45,
+    "conditions": [
+      {
+        "id": "C-W2",
+        "type": "w2",
+        "text": "2025 W-2 from current employer"
+      }
+    ],
+    "document": {
+      "document_id": "DOC-40513-W",
+      "filename": "w2-2025-KH-26-40513.pdf",
+      "doc_type": "w2",
+      "condition_id": "C-W2",
+      "sha256": "38669527f422d50dd1dc5a6b4c5d3c1e567212bf2e555a69e454455a468ee0a4",
+      "pages": 1
+    }
+  }
+]

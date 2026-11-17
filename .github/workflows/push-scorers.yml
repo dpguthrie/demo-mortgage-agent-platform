@@ -1,0 +1,38 @@
+# Scorers live in git. On merge to main, push each team's scorers to Braintrust, so online
+# scoring on production traces runs the same code the release gate ran on the PR.
+name: Push scorers
+on:
+  push:
+    branches: [main]
+    paths: ["apps/*/scorers.py", "apps/*/braintrust_functions.py"]
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  push:
+    runs-on: ${{ vars.EVAL_RUNNER || 'ubuntu-latest' }}
+    env:
+      BRAINTRUST_API_KEY: ${{ secrets.BRAINTRUST_API_KEY }}
+      BRAINTRUST_API_URL: ${{ vars.BRAINTRUST_API_URL }}
+      BRAINTRUST_PROJECT: ${{ vars.BRAINTRUST_PROJECT }}
+      BT_VERSION: "0.32.0"
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+      - run: pip install -r requirements.txt
+      - name: Install the bt CLI (pinned, checksum verified)
+        run: |
+          base="https://github.com/braintrustdata/bt/releases/download/v${BT_VERSION}"
+          curl -fsSL -o bt.tgz "$base/bt-x86_64-unknown-linux-gnu.tar.gz"
+          curl -fsSL -o bt.tgz.sha256 "$base/bt-x86_64-unknown-linux-gnu.tar.gz.sha256"
+          echo "$(cut -d' ' -f1 bt.tgz.sha256)  bt.tgz" | sha256sum -c -
+          mkdir -p bt-dist "$HOME/.local/bin" && tar -xzf bt.tgz -C bt-dist
+          install -m 0755 "$(find bt-dist -type f -name bt | head -n 1)" "$HOME/.local/bin/bt"
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+      - name: bt functions push
+        working-directory: apps/clearpath
+        run: |
+          bt --version
+          bt functions push braintrust_functions.py --if-exists replace --language python --runner python -p "$BRAINTRUST_PROJECT" -y

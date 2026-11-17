@@ -1,0 +1,15 @@
+# Clearpath's pre-deploy check: the platform eval on Clearpath's reference cases.
+name: Clearpath release gate
+on:
+  pull_request:
+    paths: ["apps/clearpath/**", "keystone_agents/**", "evals/eval_clearpath.py", "data/**", "requirements.txt"]
+jobs:
+  gate:
+    uses: ./.github/workflows/agent-eval.yml
+    with:
+      agent: clearpath
+      eval_file: evals/eval_clearpath.py
+      dataset: golden-clearpath
+      gate_score: Condition decision
+      gate_min: "0.95"
+    secrets: inherit

@@ -1,0 +1,15 @@
+# Escrow Desk's pre-deploy check: same platform workflow, its own dataset and score.
+name: Escrow Desk release gate
+on:
+  pull_request:
+    paths: ["apps/escrow_desk/**", "keystone_agents/**", "evals/eval_escrow_desk.py", "data/escrow_accounts.json"]
+jobs:
+  gate:
+    uses: ./.github/workflows/agent-eval.yml
+    with:
+      agent: escrow-desk
+      eval_file: evals/eval_escrow_desk.py
+      dataset: golden-escrow-desk
+      gate_score: Numbers grounded
+      gate_min: "0.9"
+    secrets: inherit

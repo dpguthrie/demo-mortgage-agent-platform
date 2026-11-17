@@ -1,0 +1,8 @@
+strands-agents[openai]>=1.65
+braintrust>=0.51
+python-dotenv>=1.0
+openai>=1.50
+reportlab>=4.2
+pypdf>=5.0
+requests>=2.32
+pydantic>=2

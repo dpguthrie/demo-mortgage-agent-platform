@@ -1,0 +1,74 @@
+# Keystone Agent Platform: the pre-deploy eval every agent team calls (reusable workflow).
+# Runs the team's eval on its reference dataset as a Braintrust experiment, gates the PR on one
+# score, writes the verdict to the experiment (metadata.release_gate) and comments it on the PR.
+#
+# Where things run (nothing leaves our AWS account when BYOC is on):
+#   runner        vars.EVAL_RUNNER: a self-hosted runner label in our VPC (default: GitHub-hosted)
+#   models        vars.AWS_EVAL_ROLE_ARN set → OIDC role, Bedrock models in our account
+#                 unset → the OpenAI-compatible gateway (KEYSTONE_GATEWAY_URL)
+#   Braintrust    vars.BRAINTRUST_API_URL → our BYOC data plane (unset = Braintrust cloud)
+#   API key       secrets.BRAINTRUST_API_KEY (org secret), or vars.BRAINTRUST_SECRET_ID in AWS Secrets Manager
+name: Agent eval (platform)
+on:
+  workflow_call:
+    inputs:
+      agent: { required: true, type: string, description: "Agent name, used in the experiment name" }
+      eval_file: { required: true, type: string }
+      dataset: { required: true, type: string }
+      gate_score: { required: true, type: string }
+      gate_min: { required: false, type: string, default: "0.95" }
+    secrets:
+      BRAINTRUST_API_KEY: { required: false }
+permissions:
+  contents: read
+  pull-requests: write
+  id-token: write # OIDC to AWS
+jobs:
+  eval:
+    runs-on: ${{ vars.EVAL_RUNNER || 'ubuntu-latest' }}
+    env:
+      BRAINTRUST_API_KEY: ${{ secrets.BRAINTRUST_API_KEY }}
+      BRAINTRUST_API_URL: ${{ vars.BRAINTRUST_API_URL }}
+      BRAINTRUST_PROJECT: ${{ vars.BRAINTRUST_PROJECT }}
+      BRAINTRUST_PROJECT_ID: ${{ vars.BRAINTRUST_PROJECT_ID }}
+      EVAL_DATASET: ${{ inputs.dataset }}
+      EXPERIMENT_NAME: "${{ inputs.agent }} · ci · PR #${{ github.event.pull_request.number }}"
+      PR_URL: ${{ github.event.pull_request.html_url }}
+      KEYSTONE_MODEL_PROVIDER: ${{ vars.AWS_EVAL_ROLE_ARN && 'bedrock' || 'gateway' }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: actions/setup-python@a309ff8b426b58ec0e2a45f0f869d46889d02405 # v6.2.0
+        with:
+          python-version: "3.13"
+          cache: pip
+      - name: AWS credentials (OIDC, no long-lived keys)
+        if: ${{ vars.AWS_EVAL_ROLE_ARN != '' }}
+        uses: aws-actions/configure-aws-credentials@cbe3b392738ccf3f987d68400dafcf4b0624a56c # v6.2.4
+        with:
+          role-to-assume: ${{ vars.AWS_EVAL_ROLE_ARN }}
+          aws-region: ${{ vars.AWS_REGION || 'us-west-2' }}
+      - name: Braintrust API key from Secrets Manager
+        if: ${{ vars.BRAINTRUST_SECRET_ID != '' }}
+        run: |
+          key=$(aws secretsmanager get-secret-value --secret-id "${{ vars.BRAINTRUST_SECRET_ID }}" --query SecretString --output text)
+          echo "::add-mask::$key"
+          echo "BRAINTRUST_API_KEY=$key" >> "$GITHUB_ENV"
+      - run: pip install -r requirements.txt
+      - name: Run the agent eval
+        run: |
+          set -o pipefail
+          braintrust eval "${{ inputs.eval_file }}" 2>&1 | tee eval.log
+      - name: Release gate
+        run: |
+          set -o pipefail
+          python -m keystone_agents.evals.gate --experiment "$EXPERIMENT_NAME" --score "${{ inputs.gate_score }}" --min "${{ inputs.gate_min }}" --no-zero | tee gate.log
+      - name: Post the verdict on the PR
+        if: always()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          {
+            echo "**${{ inputs.agent }} release gate:** $(tail -n 1 gate.log 2>/dev/null || echo 'did not run, see the job log')"
+            grep -o 'https://www.braintrust.dev/app/[^ ]*' eval.log 2>/dev/null | head -n 1
+          } > comment.md
+          gh pr comment "${{ github.event.pull_request.number }}" --body-file comment.md

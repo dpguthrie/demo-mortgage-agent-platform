@@ -1,0 +1,8 @@
+{
+  "KH-26-40117": {"analysis_date": "2026-11-01", "current_monthly_escrow": 512.40, "new_monthly_escrow": 548.75, "annual_property_tax": 4620.00, "annual_hazard_insurance": 1965.00, "projected_shortage": 218.10, "shortage_spread_months": 12, "surplus_refund": 0.0},
+  "KH-26-40251": {"analysis_date": "2026-11-01", "current_monthly_escrow": 631.00, "new_monthly_escrow": 604.20, "annual_property_tax": 5480.00, "annual_hazard_insurance": 1770.40, "projected_shortage": 0.0, "shortage_spread_months": 0, "surplus_refund": 142.35},
+  "KH-26-40307": {"analysis_date": "2026-10-15", "current_monthly_escrow": 455.90, "new_monthly_escrow": 501.15, "annual_property_tax": 3910.00, "annual_hazard_insurance": 2103.80, "projected_shortage": 271.50, "shortage_spread_months": 12, "surplus_refund": 0.0},
+  "KH-26-40345": {"analysis_date": "2026-10-15", "current_monthly_escrow": 588.25, "new_monthly_escrow": 588.25, "annual_property_tax": 4870.00, "annual_hazard_insurance": 2189.00, "projected_shortage": 0.0, "shortage_spread_months": 0, "surplus_refund": 0.0},
+  "KH-26-40466": {"analysis_date": "2026-11-01", "current_monthly_escrow": 702.60, "new_monthly_escrow": 779.10, "annual_property_tax": 6950.00, "annual_hazard_insurance": 2399.20, "projected_shortage": 459.00, "shortage_spread_months": 12, "surplus_refund": 0.0},
+  "KH-26-40482": {"analysis_date": "2026-11-01", "current_monthly_escrow": 540.00, "new_monthly_escrow": 512.85, "annual_property_tax": 4410.00, "annual_hazard_insurance": 1744.20, "projected_shortage": 0.0, "shortage_spread_months": 0, "surplus_refund": 88.60}
+}
