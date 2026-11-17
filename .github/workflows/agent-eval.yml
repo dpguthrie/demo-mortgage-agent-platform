@@ -28,7 +28,9 @@ jobs:
     runs-on: ${{ vars.EVAL_RUNNER || 'ubuntu-latest' }}
     env:
       BRAINTRUST_API_KEY: ${{ secrets.BRAINTRUST_API_KEY }}
-      BRAINTRUST_API_URL: ${{ vars.BRAINTRUST_API_URL }}
+      # BYOC data plane when set; Braintrust cloud otherwise
+      BRAINTRUST_API_URL: ${{ vars.BRAINTRUST_API_URL || 'https://api.braintrust.dev' }}
+      BRAINTRUST_APP_URL: ${{ vars.BRAINTRUST_APP_URL || 'https://www.braintrust.dev' }}
       BRAINTRUST_PROJECT: ${{ vars.BRAINTRUST_PROJECT }}
       BRAINTRUST_PROJECT_ID: ${{ vars.BRAINTRUST_PROJECT_ID }}
       EVAL_DATASET: ${{ inputs.dataset }}

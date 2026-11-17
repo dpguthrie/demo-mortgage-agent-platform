@@ -15,7 +15,7 @@ from datetime import datetime, timezone
 
 import requests
 
-API = os.environ.get("BRAINTRUST_API_URL", "https://api.braintrust.dev")
+API = os.environ.get("BRAINTRUST_API_URL") or "https://api.braintrust.dev"
 
 
 def _req(method: str, path: str, **kw) -> requests.Response:
