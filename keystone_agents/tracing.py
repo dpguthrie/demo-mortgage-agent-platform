@@ -26,18 +26,11 @@ def trace_enabled() -> bool:
     return os.environ.get("BRAINTRUST_TRACE_ENABLED", "true").lower() != "false"
 
 
-def _span_format() -> None:
-    from braintrust.span_customizer import set_span_customizers
-    from ._span_format import StrandsChatFormat
-    set_span_customizers([StrandsChatFormat()])
-
-
 def init_tracing(project: str | None = None):
     """Start the project logger and instrument Strands. Safe to call more than once."""
     global _logger
     if _logger is not None:
         return _logger
-    _span_format()
     project = project or os.environ["BRAINTRUST_PROJECT"]
     _logger = braintrust.init_logger(project=project, set_current=True)
     setup_strands(project_name=project)
@@ -68,5 +61,4 @@ def child_span(name: str, type: str = "task", **event: Any) -> Iterator[Any]:
 def instrument_strands() -> None:
     """Instrument Strands without starting a project logger (evals log to their experiment)."""
     from braintrust.integrations.strands import StrandsIntegration
-    _span_format()
     StrandsIntegration.setup()

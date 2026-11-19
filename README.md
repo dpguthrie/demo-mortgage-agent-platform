@@ -21,12 +21,13 @@ init_tracing()   # every Strands agent, model call and tool call is now traced
 
 - Turns on Braintrust's native Strands integration (`setup_strands()`): each `Agent` call, model
   call, event-loop cycle and tool call becomes a span, nested under the request. Nothing else in
-  the agent changes. → [`init_tracing()`](keystone_agents/tracing.py#L35-L45)
+  the agent changes. Braintrust renders Strands’ native messages and tool calls directly.
+  → [`init_tracing()`](keystone_agents/tracing.py#L29-L38)
 - Where the data goes is set by environment only: one Braintrust project per team
   (`BRAINTRUST_PROJECT`), our BYOC data plane (`BRAINTRUST_API_URL`), the key from Secrets Manager.
   → [module docs](keystone_agents/tracing.py#L1-L14)
 - `child_span()` nests work a tool starts (e.g. a sub-agent) under that tool call.
-  → [`child_span()`](keystone_agents/tracing.py#L61-L65) · used in [Clearpath's review pipeline](apps/clearpath/review.py)
+  → [`child_span()`](keystone_agents/tracing.py#L54-L58) · used in [Clearpath's review pipeline](apps/clearpath/review.py)
 - Example: [Clearpath's runtime entrypoint](apps/clearpath/handler.py#L9)
 
 ### 2. The eval harness: one call per team
