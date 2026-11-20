@@ -15,7 +15,7 @@ on:
       agent: { required: true, type: string, description: "Agent name, used in the experiment name" }
       eval_file: { required: true, type: string }
       dataset: { required: true, type: string }
-      gate_score: { required: true, type: string }
+      gate_score: { required: true, type: string, description: "Name emitted by the scorer that gates the run" }
       gate_min: { required: false, type: string, default: "0.95" }
     secrets:
       BRAINTRUST_API_KEY: { required: false }
@@ -32,7 +32,6 @@ jobs:
       BRAINTRUST_API_URL: ${{ vars.BRAINTRUST_API_URL || 'https://api.braintrust.dev' }}
       BRAINTRUST_APP_URL: ${{ vars.BRAINTRUST_APP_URL || 'https://www.braintrust.dev' }}
       BRAINTRUST_PROJECT: ${{ vars.BRAINTRUST_PROJECT }}
-      BRAINTRUST_PROJECT_ID: ${{ vars.BRAINTRUST_PROJECT_ID }}
       EVAL_DATASET: ${{ inputs.dataset }}
       EXPERIMENT_NAME: "${{ inputs.agent }} · ci · PR #${{ github.event.pull_request.number }}"
       PR_URL: ${{ github.event.pull_request.html_url }}
@@ -56,21 +55,28 @@ jobs:
           echo "::add-mask::$key"
           echo "BRAINTRUST_API_KEY=$key" >> "$GITHUB_ENV"
       - run: pip install -r requirements.txt
-      - name: Run the agent eval
+      - name: Run the agent eval and release gate
+        env:
+          EVAL_FILE: ${{ inputs.eval_file }}
+          GATE_SCORE: ${{ inputs.gate_score }}
+          GATE_MIN: ${{ inputs.gate_min }}
         run: |
           set -o pipefail
-          braintrust eval "${{ inputs.eval_file }}" 2>&1 | tee eval.log
-      - name: Release gate
-        run: |
-          set -o pipefail
-          python -m keystone_agents.evals.gate --experiment "$EXPERIMENT_NAME" --score "${{ inputs.gate_score }}" --min "${{ inputs.gate_min }}" --no-zero | tee gate.log
+          : "${GATE_SCORE:?Set gate_score to a scorer name from this eval}"
+          braintrust eval --terminate-on-failure "$EVAL_FILE" 2>&1 | tee eval.log
       - name: Post the verdict on the PR
         if: always()
         env:
           GH_TOKEN: ${{ github.token }}
+          AGENT: ${{ inputs.agent }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         run: |
+          verdict=$(sed -n 's/^Release gate: //p' eval.log 2>/dev/null || true)
+          experiment=$(sed -n 's/^Experiment URL: //p' eval.log 2>/dev/null || true)
           {
-            echo "**${{ inputs.agent }} release gate:** $(tail -n 1 gate.log 2>/dev/null || echo 'did not run, see the job log')"
-            grep -o 'https://www.braintrust.dev/app/[^ ]*' eval.log 2>/dev/null | head -n 1
+            printf '**%s release gate:** %s\n' "$AGENT" "${verdict:-No verdict. See the job log.}"
+            if [ -n "$experiment" ]; then
+              printf '\n[Braintrust experiment](%s)\n' "$experiment"
+            fi
           } > comment.md
-          gh pr comment "${{ github.event.pull_request.number }}" --body-file comment.md
+          gh pr comment "$PR_NUMBER" --body-file comment.md

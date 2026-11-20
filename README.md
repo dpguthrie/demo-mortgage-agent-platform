@@ -49,22 +49,24 @@ agent_eval("clearpath", task=run_one_case, scorers=[condition_decision, paystub_
 ### 3. The release gate
 
 ```bash
-python -m keystone_agents.evals.gate --experiment "clearpath · ci · PR #12" --score "Condition decision" --min 0.95 --no-zero
+GATE_SCORE="Condition decision" GATE_MIN=0.95 braintrust eval evals/eval_clearpath.py
 ```
 
-- One pass/fail rule for every team: the gate score is at or above the threshold, **no case scores
-  0**, and **every case was scored** (an errored case can't slip through as "not counted").
-  → [the rule](keystone_agents/evals/gate.py#L58-L59)
-- Writes the verdict onto the experiment (`metadata.release_gate`), so Braintrust, and anyone asking
-  Loop, see the gate's answer. → [write-back](keystone_agents/evals/gate.py#L63-L71)
+- The workflow passes the name of one score from the eval and its threshold to the shared
+  [Braintrust Reporter](keystone_agents/evals/gate.py). Clearpath uses **Condition decision** at
+  **95%** and Escrow Desk uses **Numbers grounded** at **90%**.
+- The Reporter reads the completed eval results. The eval passes when the selected score's average
+  meets the threshold and every case has a nonzero score. Empty runs fail.
+- The Reporter stores the verdict on that experiment in `metadata.release_gate`, where Braintrust
+  and Loop can read it. Local runs opt in by setting `GATE_SCORE`.
 
 ### 4. Pre-deploy checks in GitHub Actions (with AWS)
 
 One reusable workflow the platform owns; each team adds a ten-line caller.
 → [`agent-eval.yml`](.github/workflows/agent-eval.yml) · callers: [`clearpath.yml`](.github/workflows/clearpath.yml), [`escrow-desk.yml`](.github/workflows/escrow-desk.yml)
 
-On every pull request that touches the team's agent, it runs the eval → the gate → posts the verdict
-on the PR. How it fits our AWS setup:
+On every pull request that touches the team's agent, the workflow runs the eval. The Reporter sets
+the eval command's exit status, and the workflow posts the verdict and experiment link on the PR.
 
 | Concern | How | Where |
 |---|---|---|
@@ -76,7 +78,7 @@ on the PR. How it fits our AWS setup:
 
 ### 5. Scorers live in git
 
-- Each team's scorers are plain functions in its repo: the gate imports them directly
+- Each team's scorers are plain functions in its repo. The eval imports them directly
   ([Clearpath's scorers](apps/clearpath/scorers.py)), and a registration file publishes the same
   code to Braintrust ([`braintrust_functions.py`](apps/clearpath/braintrust_functions.py)).
 - On merge to `main`, [`push-scorers.yml`](.github/workflows/push-scorers.yml#L36-L40) runs

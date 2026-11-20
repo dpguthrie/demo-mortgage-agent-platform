@@ -7,7 +7,7 @@
 - scorers are the team's own Python functions, called in-process (the same functions the team
   pushes for online scoring), plus any platform scorers they add
 - logs what changed (prompt / model / tools / code) as experiment metadata, so runs group by change
-CI runs `braintrust eval <file>` then `python -m keystone_agents.evals.gate` (see .github/workflows).
+CI sets GATE_SCORE and GATE_MIN so the eval's Reporter sets the release check status.
 """
 from __future__ import annotations
 
@@ -25,6 +25,12 @@ def agent_eval(agent: str, *, task: Callable[[Any], Any], scorers: Sequence[Call
                metadata: dict | None = None):
     project = project or os.environ["BRAINTRUST_PROJECT"]
     dataset = dataset or os.environ["EVAL_DATASET"]
+    gate_score = os.environ.get("GATE_SCORE")
+    reporter = None
+    if gate_score:
+        from .gate import release_gate_reporter
+
+        reporter = release_gate_reporter(agent, gate_score, float(os.environ.get("GATE_MIN", "0.95")))
     instrument_strands()
     meta = {**variant_meta(), "agent": agent, "dataset": dataset, **(metadata or {})}
 
@@ -41,4 +47,5 @@ def agent_eval(agent: str, *, task: Callable[[Any], Any], scorers: Sequence[Call
         experiment_name=os.environ.get("EXPERIMENT_NAME", f"{agent} · local"),
         metadata=meta,
         max_concurrency=max_concurrency,
+        reporter=reporter,
     )
